@@ -1,7 +1,6 @@
 var express = require('express'),
   router = express.Router(),
-  db = require('../models'),
-  bodyParser = require('body-parser');
+  db = require('../models'), 
   apn = require('apn'),
   path = require('path'),
   multer  = require('multer');
@@ -22,7 +21,6 @@ const rootPath = path.normalize(__dirname + '/../..');
 //Route Prefix
 module.exports = function (app) {
   app.use('/api', router);
-  app.use(bodyParser.json())
 };
 
 router.get('/apns', function (req, res) {
@@ -37,7 +35,19 @@ router.post('/apns/send-message', function (req, res) {
 
 router.post('/apns/file-upload/certificate',  upload.single('certificate'), function (req, res) {
   console.dir(req.file.filename);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
   res.send({ status: 'success', filename: req.file.filename.split('.')[0]});
+
 });
 
 router.post('/apns/file-upload/key',  upload.single('key'), function (req, res) {
