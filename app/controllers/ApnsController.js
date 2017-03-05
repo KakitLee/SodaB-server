@@ -1,22 +1,22 @@
 var express = require('express'),
-  router = express.Router(),
-  db = require('../models'), 
-  apn = require('apn'),
-  path = require('path'),
-  multer  = require('multer');
-//var mime = require('mime');
+    router = express.Router(),
+    db = require('../models'),
+    apn = require('apn'),
+    path = require('path'),
+    multer  = require('multer');
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + '.' + 'pem')
+    cb(null, file.fieldname + '-' + Date.now() + '-' + Math.floor((Math.random() * 100) + 1) + '.' + 'pem')
   }
 });
 var upload = multer({ storage: storage });
 
 const rootPath = path.normalize(__dirname + '/../..');
-
+const fs = require('fs');
 
 //Route Prefix
 module.exports = function (app) {
@@ -29,35 +29,21 @@ router.get('/apns', function (req, res) {
 
 router.post('/apns/send-message', function (req, res) {
   //var id = req.query.id; // $_GET["id"]
-  sendNotification(req.body);
-  res.send('Requested send');
+  sendNotification(req.body, res);
 });
 
 router.post('/apns/file-upload/certificate',  upload.single('certificate'), function (req, res) {
-  console.dir(req.file.filename);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-
-  // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-  // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  res.setHeader('Access-Control-Allow-Credentials', true);
   res.send({ status: 'success', filename: req.file.filename.split('.')[0]});
 
 });
 
 router.post('/apns/file-upload/key',  upload.single('key'), function (req, res) {
-  console.dir(req.file.filename);
   res.send({ status: 'success', filename: req.file.filename.split('.')[0]});
 });
 
 
-function sendNotification(request){
-  console.dir(request);
+function sendNotification(request, res){
+  console.dir('request = ',request);
   var options = {
     cert: rootPath + '/uploads/' + request.certificateName + '.pem',
     key: rootPath + '/uploads/' + request.keyName + '.pem',
@@ -75,6 +61,13 @@ function sendNotification(request){
   note.payload = {'messageFrom': 'Caroline'};
 
   apnProvider.send(note, deviceToken).then( (result) => {
-   console.dir(result);
+
+      console.dir(result);
+    if(result.failed.length !== 0){
+      res.status(400);
+      res.send({ status: 'failed', message: result.failed[0].response.reason});
+    }else{
+      res.send({ status: 'success', message: 'Notification has been delivered..!!!'});
+    }
  });
 }
