@@ -3,5 +3,5 @@ public
 .nyc_output
 .sass-cache
 uploads/
-
+.idea/*
 
