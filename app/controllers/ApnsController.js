@@ -1,6 +1,5 @@
 var express = require('express'),
     router = express.Router(),
-    db = require('../models'),
     apn = require('apn'),
     path = require('path'),
     multer  = require('multer');
@@ -60,9 +59,8 @@ function sendNotification(request, res){
   note.alert = "\uD83D\uDCE7 \u2709 " + request.message;
   note.payload = {'messageFrom': 'Caroline'};
 
-  apnProvider.send(note, deviceToken).then( (result) => {
+  apnProvider.send(note, deviceToken).then(function (result) {
 
-      console.dir(result);
     if(result.failed.length !== 0){
       res.status(400);
       res.send({ status: 'failed', message: result.failed[0].response.reason});
