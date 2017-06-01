@@ -15,6 +15,33 @@ router.get('/inventories', function (req, res) {
   res.send(data);
 });
 
+router.get('/welcomeImages', function(req, res) {
+  var filepath = process.env.PWD + '/app/mock/home/welcomeImages.json';
+  var data = readJsonFileSync(filepath);
+  res.setHeader('Content-Type', 'application/json');
+  res.send(data);
+
+});
+
+router.get('/qrcode', function(req, res) {
+  var filepath = process.env.PWD + '/app/mock/home/qrcode.json';
+  var data = readJsonFileSync(filepath);
+  res.setHeader('Content-Type', 'application/json');
+  res.send(data);
+
+});
+
+router.get('/banner', function(req, res) {
+  var filepath = process.env.PWD + '/app/mock/home/banner.json';
+  var data = readJsonFileSync(filepath);
+  res.setHeader('Content-Type', 'application/json');
+  res.send(data);
+
+});
+
+
+
+
 
 
 function readJsonFileSync(filepath, encoding){
