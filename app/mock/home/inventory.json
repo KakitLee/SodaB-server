@@ -1,0 +1,87 @@
+{
+  "highlightImages": [
+    "/static/jianlian/inventories/highlight1.jpg",
+    "/static/jianlian/inventories/highlight2.jpg",
+    "/static/jianlian/inventories/highlight3.jpg",
+    "/static/jianlian/inventories/highlight4.jpg"
+  ],
+  "items": [
+    {
+      "text": "铝合金轮椅系列",
+      "subMenus": [
+        {
+          "text": "TV",
+          "img":  "/static/jianlian/inventories/m-tv.jpg"
+        }, {
+          "text": "Box",
+          "img":  "/static/jianlian/inventories/m-box.jpg"
+        }
+      ]
+    }, {
+      "text": "高靠背轮椅系列",
+      "subMenus": [
+        {
+          "text": "Bulb",
+          "img":  "/static/jianlian/inventories/m-bulb.jpg"
+        }, {
+          "text": "Cattle",
+          "img":  "/static/jianlian/inventories/m-cattle.jpg"
+        }
+      ]
+    }, {
+      "text": "电动轮椅系列",
+      "subMenus": [
+        {
+          "text": "Convertor",
+          "img":  "/static/jianlian/inventories/m-convertor.jpg"
+        }, {
+          "text": "Cooker",
+          "img":  "/static/jianlian/inventories/m-cooker.jpg"
+        }
+      ]
+    }, {
+      "text": "休闲&运动轮椅系列",
+      "subMenus": [
+        {
+          "text": "Laptop",
+          "img":  "/static/jianlian/inventories/m-laptop.jpg"
+        }, {
+          "text": "Light",
+          "img":  "/static/jianlian/inventories/m-light.jpg"
+        }
+      ]
+    }, {
+      "text": "手动轮椅系列",
+      "subMenus": [
+        {
+          "text": "Mouse",
+          "img":  "/static/jianlian/inventories/m-mouse.jpg"
+        }, {
+          "text": "Remote",
+          "img":  "/static/jianlian/inventories/m-remote.jpg"
+        }
+      ]
+    }, {
+      "text": "澳佛轮椅系列",
+      "subMenus": [
+        {
+          "text": "Robot",
+          "img":  "/static/jianlian/inventories/m-robot.jpg"
+        }, {
+          "text": "Speaker",
+          "img":  "/static/jianlian/inventories/m-speaker.jpg"
+        }
+      ]
+    }, {
+      "text": "座便椅系列"
+    }, {
+      "text": "沐浴椅系列"
+    }, {
+      "text": "助行器&拐杖系列"
+    }, {
+      "text": "医护床系列"
+    }, {
+      "text": "康复辅具系列"
+    }
+  ]
+}
